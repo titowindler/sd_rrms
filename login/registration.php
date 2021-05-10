@@ -28,11 +28,11 @@
                   <div class="form-group">
                     <div class="row">
                       <div class="col-lg-6">
-                        <input type="text" class="form-control form-control-lg" name="username" placeholder="Input Username">
+                        <input type="text" class="form-control form-control-lg" name="username" placeholder="Input Username" required>
                       </div>
 
                     <div class="col-lg-6">
-                      <input type="password" class="form-control form-control-lg" name="password" placeholder="Input Password">
+                      <input type="password" class="form-control form-control-lg" name="password" placeholder="Input Password" required>
                     </div>    
                
                     </div>
@@ -41,11 +41,11 @@
                   <div class="form-group">
                     <div class="row">
                       <div class="col-lg-6">
-                        <input type="text" class="form-control form-control-lg" name="firstname" placeholder="Input Firstname">
+                        <input type="text" class="form-control form-control-lg" name="firstname" placeholder="Input Firstname" required>
                       </div>
 
                       <div class="col-lg-6">
-                        <input type="text" class="form-control form-control-lg" name="lastname" placeholder="Input Lastname">
+                        <input type="text" class="form-control form-control-lg" name="lastname" placeholder="Input Lastname" required>
                       </div>    
                     </div>
                  </div>

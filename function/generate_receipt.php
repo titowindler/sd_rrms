@@ -13,7 +13,11 @@ function generateReceipt() {
     $pay_id = $_GET['payID'];
     $date = date('Y-m-d');
 
+    $fetch = "SELECT * FROM receipt_details WHERE (`pay_id` LIKE '$pay_id')";
+	$fetchResult = mysqli_query($conn, $fetch);
+    $fetchNumRows = mysqli_num_rows($fetchResult);
 
+    if($fetchNumRows < 1) {
 	$sql = "INSERT INTO `receipt_details`(`receipt_id`,`pay_id`,`pay_date`,`pay_message`) 
 	VALUES (NULL,'$pay_id','$date','The owner have receive your payment')";
 	$result = mysqli_query($conn,$sql);
@@ -31,6 +35,7 @@ function generateReceipt() {
 	} else {
 		echo "error";
 	}
+  }
 }
 
 

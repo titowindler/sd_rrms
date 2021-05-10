@@ -51,7 +51,7 @@
         <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
           <ul class="navbar-nav navbar-nav-right ml-auto">
 
-           <?php require("modal-notification.php"); ?>
+          <?php //require("modal-notification.php"); ?>
 
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -139,8 +139,8 @@
                           </td>
                           <td>
                            <?php if($rowRenter['userStatus'] == 1 ) { ?>  
-                            <?=php } elseif($rowRenter['userStatus'] == 2 ){ ?>
-                            <a href"../function/generate_receipt.php?userID=<?php echo $user_id?>&payID=<?php echo $pay_id?>" class="btn btn-success btn-sm">GENERATE RECEIPT</a> 
+                            <?php } elseif($rowRenter['userStatus'] == 2 ){ ?>
+                            <a href="../function/generate_receipt.php?userID=<?php echo $user_id?>&payID=<?php echo $pay_id?>" class="btn btn-success btn-sm">GENERATE RECEIPT</a> 
                             <?php } ?>    
                           </td>
                         </tr>
