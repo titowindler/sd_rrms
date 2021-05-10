@@ -15,8 +15,11 @@ function sendPayRoom() {
 	$transaction_code=$_POST['transaction_code'];
 	$renterID = $_POST['renterID'];
 
+	$bookID = $_POST['bookID'];
+
 
 	$filename = '';
+	$number = '2';
 	//check if file uploaded exists and there are no errors during upload
 	if(isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
 		if($_FILES['image']['type'] == "image/png" || $_FILES['image']['type'] == "image/jpeg") {
@@ -29,15 +32,19 @@ function sendPayRoom() {
 	   	 }
 	  }
 
-	$sql = "INSERT INTO `pay_details`(`pay_id`,`user_id`,`sender_fname`,`sender_lname`,`remittance`,`transaction_code`,`transaction_image`) 
-	VALUES (NULL,'$renterID','$sender_fname','$sender_lname','$remittance','$transaction_code','$filename')";
+	$sql = "INSERT INTO `pay_details`(`pay_id`,`book_id`,`user_id`,`sender_fname`,`sender_lname`,`remittance`,`transaction_code`,`transaction_image`) 
+	VALUES (NULL,'$bookID','$renterID','$sender_fname','$sender_lname','$remittance','$transaction_code','$filename')";
 	$result = mysqli_query($conn,$sql);
 
 	// $sqlNotif = "INSERT INTO `notification` (`notification_id`,`notif_ownerID`,`notif_renterID`,`notif_usertype`,`notif_datetime`,`notif_message`,`notif_status`) VALUES (NULL,'1','$renterID','1','$datetime','A Renter Send You A Payment','1')";
 
+	$sqlUpdate = "UPDATE booking_details SET bookingStatus = '1' WHERE booking_id = '$bookID' AND user_id = '$renterID' ";
+	$resultUpdate = mysqli_query($conn,$sqlUpdate);
+
+
 	if($result == true) {
 		$success = "You have successfully send the payment to the owner";
-		header("location:../login/renter_pay_room.php?perfect=".$success);
+		header("location:../login/renter_view_payment.php?perfect=".$success);
 	} else {
 		echo "error";
 	}

@@ -51,7 +51,7 @@
         <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
           <ul class="navbar-nav navbar-nav-right ml-auto">
 
-           <?php require("modal-notification.php"); ?>
+            <?php //require("modal-notification.php"); ?>
 
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -104,7 +104,7 @@
                       $sqlRenter = "SELECT * FROM pay_details p
                       JOIN user_details r
                       ON r.user_id = p.user_id
-                      WHERE r.userStatus = 2 AND pay_id = '$get_payment'; 
+                      WHERE pay_id = '$get_payment'; 
                       ";
                       $resultRenter = mysqli_query($conn,$sqlRenter);
 

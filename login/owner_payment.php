@@ -51,7 +51,7 @@
         <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
           <ul class="navbar-nav navbar-nav-right ml-auto">
 
-           <?php require("modal-notification.php"); ?>
+            <?php //require("modal-notification.php"); ?>
 
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -104,6 +104,7 @@
                           <th> RENTER USERNAME</th>
                           <th> RENTER NAME </th>
                           <th> PAYMENT FORM </th>
+                          <th> PAYMENT STATUS</th>
                           <th> RECEIPT</th>
                         </tr>
                       </thead>
@@ -113,9 +114,12 @@
                       $conn = db();
 
                       $sqlRenter = "SELECT * FROM pay_details p
-                      JOIN user_details r
-                      ON r.user_id = p.user_id
-                      WHERE r.userStatus = 1 OR r.userStatus = 2; 
+                      JOIN user_details u 
+                      ON u.user_id = p.user_id
+                      JOIN booking_details b 
+                      ON b.booking_id = p.book_id
+                      WHERE b.bookingStatus = '1' OR b.bookingStatus = '2'
+                      AND u.userStatus = 3 or u.userStatus = 1
                       ";
                       $resultRenter = mysqli_query($conn,$sqlRenter);
 
@@ -128,6 +132,7 @@
                         $lastname  = $rowRenter['lastName'];
                         $pay_id = $rowRenter['pay_id'];
                         $userStatus = $rowRenter['userStatus'];   
+                        $book_id = $rowRenter['book_id'];
 
                       ?>
                      
@@ -138,13 +143,20 @@
                              <a href="owner_view_payment.php?viewPaymentID=<?php echo $pay_id?>" class="btn btn-primary btn-sm">VIEW PAYMENT</a>
                           </td>
                           <td>
-                           <?php if($rowRenter['userStatus'] == 1 ) { ?>  
-                            <?=php } elseif($rowRenter['userStatus'] == 2 ){ ?>
-                            <a href"../function/generate_receipt.php?userID=<?php echo $user_id?>&payID=<?php echo $pay_id?>" class="btn btn-success btn-sm">GENERATE RECEIPT</a> 
-                            <?php } ?>    
+                            <?php if($rowRenter['bookingStatus'] == '1') { ?> 
+                              <a href="../function/approve_payment.php?payID=<?php echo $pay_id?>&bookID=<?php echo $book_id?>" class="btn btn-danger btn-sm">APPROVED</a>
+                            <?php }else{  ?>
+                              <span class="badge badge-success">ROOM OCCUPIED</span>
+                            <?php } ?>
+                          </td>
+                          <td>
+                           <?php if($rowRenter['bookingStatus'] == 1 ) { ?>  
+                            <?php } elseif($rowRenter['bookingStatus'] == 2 ){ ?>
+                            <a href="../function/generate_receipt.php?userID=<?php echo $user_id?>&payID=<?php echo $pay_id?>" class="btn btn-success btn-sm">GENERATE RECEIPT</a>
+                            <?php } ?> 
                           </td>
                         </tr>
-                         <?php }?>
+                         <?php }  ?>
                         </tbody>
                     </table>
                   </div>

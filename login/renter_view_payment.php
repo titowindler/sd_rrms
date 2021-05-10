@@ -73,8 +73,8 @@
           <nav class="sidebar sidebar-offcanvas" id="sidebar" style="background-color:white">
            <ul class="nav">
             <li class="nav-item nav-category"><a class="nav-link" href="renter_dashboard.php"><span class="nav-link text-dark">DASHBOARD</span></a></li>
-            <li class="nav-item nav-category active"><a class="nav-link" href="renter_view_agreement.php"><span class="nav-link text-light">VIEW AGREEMENT</span></a></li>
-             <li class="nav-item nav-category"><a class="nav-link" href="renter_pay_room.php"><span class="nav-link text-dark">PAY ROOM</span></a></li>
+            <li class="nav-item nav-category active"><a class="nav-link" href="renter_view_payment.php"><span class="nav-link text-light">VIEW BOOK ROOM</span></a></li>
+             <!-- <li class="nav-item nav-category"><a class="nav-link" href="renter_pay_room.php"><span class="nav-link text-dark">PAY ROOM</span></a></li> -->
             <li class="nav-item nav-category"><a class="nav-link" href="renter_receipt.php"><span class="nav-link text-dark">receipt</span></a></li>
            </ul>
         </nav>
@@ -88,7 +88,7 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                   <h4 class="card-title">VIEW AGREEMENT FORM</h4>
+                   <h4 class="card-title">VIEW BOOK ROOM</h4>
               
                   <table class="table table-bordered">
                       <thead>
@@ -97,7 +97,7 @@
                           <th> ROOM NUMBER </th>
                           <th> ROOM PRICE </th>
                           <th> OCCUPATION DATE </th>
-                          <th> SIGN AGREEMENT FORM </th>
+                          <th> PAY ROOM </th>
                          <!--  <th> CANCEL BOOKING </th> -->
                         </tr>
                       </thead>
@@ -119,10 +119,13 @@
                           <td> <?php echo $rowRooms['room_price']; ?> </td>
                           <td> Start Date:<?php echo $rowRooms['startDate']; ?> - End Date:<?php echo $rowRooms['endDate']; ?> </td>
                           <td>
-                            <?php if($rowRooms['bookingStatus'] == '1' OR $rowRooms['bookingStatus'] == '2') {  ?>
-                            <a href="renter_see_agreement.php?viewBookID=<?php echo $rowRooms['booking_id']?>" class="btn btn-primary btn-sm">VIEW AGREEMENT</a>
-                            <?php }else{ ?>
-                              <a href="renter_add_agreement.php?bookID=<?php echo $rowRooms['booking_id']?>" class="btn btn-success btn-sm">SIGNED AGREEMENT</a>
+                            <?php if($rowRooms['bookingStatus'] == '2' OR $rowRooms['bookingStatus'] == '3') {  ?>
+                            <!-- <a href="renter_see_agreement.php?viewBookID=<?php echo $rowRooms['booking_id']?>" class="btn btn-primary btn-sm">VIEW AGREEMENT</a> -->
+                            <button class="btn btn-success btn-sm">ROOM PAID</button>
+                            <?php }else if($rowRooms['bookingStatus'] == '1'){ ?>
+                              <button class="btn btn-primary btn-sm">WAITING FOR APPROVAL</button>
+                             <?php } else { ?>
+                              <a href="renter_pay_room.php?bookID=<?php echo $rowRooms['booking_id']?>" class="btn btn-danger btn-sm">PAY ROOM</a>
                              <?php } ?>  
                           </td>
                          <!--  <td> 

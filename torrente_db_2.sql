@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2021 at 07:08 AM
+-- Generation Time: May 11, 2021 at 12:13 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `torrente_db`
+-- Database: `torrente_db_2`
 --
 
 -- --------------------------------------------------------
@@ -65,7 +65,8 @@ CREATE TABLE `booking_details` (
 --
 
 INSERT INTO `booking_details` (`booking_id`, `user_id`, `room_id`, `startDate`, `endDate`, `bookingStatus`) VALUES
-(17, 2, 5, '2021-05-05', '2021-06-05', 2);
+(23, 2, 1, '2021-05-10', '2021-06-10', 2),
+(24, 8, 2, '2021-05-11', '2021-06-11', 2);
 
 -- --------------------------------------------------------
 
@@ -75,6 +76,7 @@ INSERT INTO `booking_details` (`booking_id`, `user_id`, `room_id`, `startDate`, 
 
 CREATE TABLE `pay_details` (
   `pay_id` int(11) NOT NULL,
+  `book_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `sender_fname` varchar(250) NOT NULL,
   `sender_lname` varchar(250) NOT NULL,
@@ -87,8 +89,9 @@ CREATE TABLE `pay_details` (
 -- Dumping data for table `pay_details`
 --
 
-INSERT INTO `pay_details` (`pay_id`, `user_id`, `sender_fname`, `sender_lname`, `remittance`, `transaction_code`, `transaction_image`) VALUES
-(8, 2, 'Connie', 'Torrente', 'pp', '1231231', '../images/_angle-left-solid (1).png');
+INSERT INTO `pay_details` (`pay_id`, `book_id`, `user_id`, `sender_fname`, `sender_lname`, `remittance`, `transaction_code`, `transaction_image`) VALUES
+(16, 23, 2, 'Connie', 'Torrente', 'cl', '123', '../images/2_transmutation-table.jpg'),
+(17, 24, 8, 'Jane', 'Janica', 'cl', '123', '../images/2_1_fullcalendar.png');
 
 -- --------------------------------------------------------
 
@@ -102,6 +105,14 @@ CREATE TABLE `receipt_details` (
   `pay_date` date NOT NULL,
   `pay_message` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `receipt_details`
+--
+
+INSERT INTO `receipt_details` (`receipt_id`, `pay_id`, `pay_date`, `pay_message`) VALUES
+(8, 16, '2021-05-10', 'The owner have receive your payment'),
+(9, 17, '2021-05-11', 'The owner have receive your payment');
 
 -- --------------------------------------------------------
 
@@ -125,10 +136,10 @@ CREATE TABLE `room_details` (
 --
 
 INSERT INTO `room_details` (`room_id`, `room_number`, `room_price`, `location`, `room_type`, `room_description`, `room_img`, `room_status`) VALUES
-(1, '1', 2500, '5th Green Avenue Mt View North Side Cebu City', 'Single', 'A room assigned to one person. May have one or more beds', '../images/1_room1.jpg', 1),
-(2, '2', 50000, 'Near Country Mall, SM Seaside By the beach ', 'Double', 'A room assigned to two people. May have one or more beds.', '../images/2_room2.jpg', 1),
+(1, '1', 2500, '5th Green Avenue Mt View North Side Cebu City', 'Single', 'A room assigned to one person. May have one or more beds', '../images/1_room1.jpg', 0),
+(2, '2', 50000, 'Near Country Mall, SM Seaside By the beach ', 'Double', 'A room assigned to two people. May have one or more beds.', '../images/2_room2.jpg', 0),
 (5, '1', 500, 'ada', 'Single', 'A room assigned to one person. May have one or more beds', '../images/1_fullcalendar.png', 1),
-(16, '123', 123, '123', 'Double', 'A room assigned to two people. May have one or more beds.', '../images/123_bh-methdology-new.png', 0);
+(16, '123', 123, '123', 'Double', 'A room assigned to two people. May have one or more beds.', '../images/123_bh-methdology-new.png', 1);
 
 -- --------------------------------------------------------
 
@@ -152,8 +163,9 @@ CREATE TABLE `user_details` (
 
 INSERT INTO `user_details` (`user_id`, `username`, `password`, `firstName`, `lastName`, `userType`, `userStatus`) VALUES
 (1, 'owner', '72122ce96bfec66e2396d2e25225d70a', 'Rose', 'Torrente', 2, 1),
-(2, 'connie', '153c85c8e79935c59b3c0c51ae886947', 'Connie', 'Torrente', 1, 1),
-(6, 'test', '098f6bcd4621d373cade4e832627b4f6', 'John', 'Doe', 1, 1);
+(2, 'connie', '153c85c8e79935c59b3c0c51ae886947', 'Connie', 'Torrente', 1, 3),
+(6, 'test', '098f6bcd4621d373cade4e832627b4f6', 'John', 'Doe', 1, 1),
+(8, 'renter', 'e7be098f0619600a1a8174020ef72fdd', 'Jane', 'Janica', 1, 3);
 
 --
 -- Indexes for dumped tables
@@ -209,19 +221,19 @@ ALTER TABLE `agreement_details`
 -- AUTO_INCREMENT for table `booking_details`
 --
 ALTER TABLE `booking_details`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `pay_details`
 --
 ALTER TABLE `pay_details`
-  MODIFY `pay_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `pay_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `receipt_details`
 --
 ALTER TABLE `receipt_details`
-  MODIFY `receipt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `receipt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `room_details`
@@ -233,7 +245,7 @@ ALTER TABLE `room_details`
 -- AUTO_INCREMENT for table `user_details`
 --
 ALTER TABLE `user_details`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

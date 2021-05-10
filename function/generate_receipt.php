@@ -14,11 +14,14 @@ function generateReceipt() {
     $date = date('Y-m-d');
 
 
+    $fetch = "SELECT * FROM receipt_details WHERE (`pay_id` LIKE '$pay_id')";
+	$fetchResult = mysqli_query($conn, $fetch);
+    $fetchNumRows = mysqli_num_rows($fetchResult);
+
+ if($fetchNumRows < 1) {
 	$sql = "INSERT INTO `receipt_details`(`receipt_id`,`pay_id`,`pay_date`,`pay_message`) 
 	VALUES (NULL,'$pay_id','$date','The owner have receive your payment')";
 	$result = mysqli_query($conn,$sql);
-
-	var_dump($sql);
 
 	$sqlUpdate = "UPDATE user_details SET `userStatus` = '3' WHERE `user_id` = '$user_id' ";
 	$resultUpdate = mysqli_query($conn,$sqlUpdate);
@@ -30,9 +33,11 @@ function generateReceipt() {
 		header("location:../login/owner_payment.php?perfect=".$success);
 	} else {
 		echo "error";
+	} 
+     }else{
+	  $fail = "You Cannot Send Another Receipt";
+	  header("location:../login/owner_payment.php?error=".$fail);
 	}
-}
-
-
+   }
 
 ?>

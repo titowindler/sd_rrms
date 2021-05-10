@@ -24,7 +24,7 @@ function setBookRoom() {
 
 	if($result == true) {
 		$success = "You Have Successfully Booked A Room";
-		header("location:../login/renter_view_agreement.php?perfect=".$success);
+		header("location:../login/renter_view_payment.php?perfect=".$success);
 	} else {
 		echo "error";
 	}

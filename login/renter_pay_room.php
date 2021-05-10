@@ -74,8 +74,8 @@
           <nav class="sidebar sidebar-offcanvas" id="sidebar" style="background-color:white">
            <ul class="nav">
             <li class="nav-item nav-category"><a class="nav-link" href="renter_dashboard.php"><span class="nav-link text-dark">DASHBOARD</span></a></li>
-            <li class="nav-item nav-category"><a class="nav-link" href="renter_view_agreement.php"><span class="nav-link text-dark">VIEW AGREEMENT</span></a></li>
-            <li class="nav-item nav-category active"><a class="nav-link" href="renter_pay_room.php"><span class="nav-link text-light">PAY ROOM</span></a></li>
+            <li class="nav-item nav-category active"><a class="nav-link" href="renter_view_payment.php"><span class="nav-link text-white">VIEW BOOK ROOM</span></a></li>
+           <!--  <li class="nav-item nav-category active"><a class="nav-link" href="renter_pay_room.php"><span class="nav-link text-light">PAY ROOM</span></a></li> -->
              <li class="nav-item nav-category"><a class="nav-link" href="renter_receipt.php"><span class="nav-link text-dark">RECEIPT</span></a></li>
            </ul>
         </nav>
@@ -105,10 +105,14 @@
                       $firstname = $row['firstName'];
                       $lastname = $row['lastName'];
 
+                      $bookID = $_GET['bookID'];
 
                       ?>
 
-                      <input type="hidden" value="<?php echo $renterID ?>" name="renterID">
+                    <input type="hidden" value="<?php echo $renterID ?>" name="renterID">
+
+                    <input type="hidden" value="<?php echo $bookID ?>" name="bookID">
+
 
                     <div class="form-group">
                       <label>Upload Picture:</label>
@@ -145,6 +149,7 @@
                       </div>
 
                        <button type="submit" class="btn btn-success btn-md mr-2" name="payRoom">Submit</button>
+                         <a href="renter_view_payment.php" class="btn btn-danger btn-md">CANCEL</a>
                       </form>
 
                   </div>
@@ -216,6 +221,7 @@
               <div class="modal-footer bg-whitesmoke br">
                 <button type="submit" class="btn btn-primary" name="addSubjectSubmit">SUBMIT</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal" id="closeModal">CLOSE</button>
+                <a href="renter_view_payment.php" class="btn btn-danger btn-sm">CANCEL</a>
               </div>
           </form>
 

@@ -3,7 +3,7 @@ function db(){
 	$servername = "localhost";
 	$username = "root";
 	$password = "";
-	$db="torrente_db";
+	$db="torrente_db_2";
 
 	static $conn;
 	$conn = mysqli_connect($servername, $username, $password,$db);

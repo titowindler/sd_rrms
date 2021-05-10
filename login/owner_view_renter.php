@@ -51,7 +51,7 @@
         <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
           <ul class="navbar-nav navbar-nav-right ml-auto">
 
-           <?php require("modal-notification.php"); ?>
+           <?php //require("modal-notification.php"); ?>
 
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -102,8 +102,7 @@
                         <tr>
                           <th> RENTER USERNAME</th>
                           <th> RENTER NAME </th>
-                          <th> ROOM NUMBER </th>
-                          <th> AGREEMENT FORM </th>
+                          <th> ROOM STATUS </th>
                           <th> PAYMENT STATUS </th>
                          
                         </tr>
@@ -118,7 +117,7 @@
                       ON renter.user_id = booking.user_id 
                       JOIN room_details room
                       ON room.room_id = booking.room_id
-                      WHERE renter.userType = 1 AND bookingStatus = 1 OR bookingStatus = 2; 
+                      WHERE renter.userType = 1
                       ";
                       $resultRenter = mysqli_query($conn,$sqlRenter);
 
@@ -141,15 +140,13 @@
                           <td> <?php echo $firstname?> <?php echo $lastname?> </td>
                           <td> # <?php echo $number ?> - PHP <?php echo $price?> </td>
                           <td>
-                             <a href="owner_view_agreement.php?viewBookID=<?php echo $booking_id?>" class="btn btn-primary btn-sm">VIEW AGREEMENT</a>
-                          </td>
-                          <td>
-                           <?php if($rowRenter['bookingStatus'] == 1 ) { ?> 
-                             <p class="text-danger text-bold">NOT YET PAID</p>
-                             <a href="../function/pay_room.php?bookID=<?php echo $booking_id?>&renterID=<?php echo $renterID?>" class="btn btn-danger btn-sm">CLICK FOR PAY</a>
-                            <?php } elseif ($rowRenter['bookingStatus'] == 2 ) { ?>
-                             <p class="text-success text-bold">PAID</p>
-                            <?php } ?> 
+                           <?php if($rowRenter['bookingStatus'] == 0 ) { ?> 
+                             <p class="text-dark text-bold">RESERVED ROOM</p>
+                            <?php } elseif ($rowRenter['bookingStatus'] == 1) { ?>
+                             <p class="text-dark text-bold">PAYMENT SENT</p>
+                            <?php } elseif ($rowRenter['bookingStatus'] == 2) { ?>
+                             <p class="text-dark text-bold">APPROVED PAYMENT</p>
+                           <?php } ?> 
                           </td>
                       
                         </tr>

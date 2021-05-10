@@ -73,8 +73,8 @@
           <nav class="sidebar sidebar-offcanvas" id="sidebar" style="background-color:white">
            <ul class="nav">
             <li class="nav-item nav-category"><a class="nav-link" href="renter_dashboard.php"><span class="nav-link text-dark">DASHBOARD</span></a></li>
-            <li class="nav-item nav-category"><a class="nav-link" href="renter_view_agreement.php"><span class="nav-link text-dark">VIEW AGREEMENT</span></a></li>
-             <li class="nav-item nav-category"><a class="nav-link" href="renter_pay_room.php"><span class="nav-link text-dark">PAY ROOM</span></a></li>
+            <li class="nav-item nav-category"><a class="nav-link" href="renter_view_payment.php"><span class="nav-link text-dark">VIEW BOOK ROOM</span></a></li>
+             <!-- <li class="nav-item nav-category"><a class="nav-link" href="renter_pay_room.php"><span class="nav-link text-dark">PAY ROOM</span></a></li> -->
             <li class="nav-item nav-category active"><a class="nav-link" href="renter_receipt.php"><span class="nav-link text-light">receipt</span></a></li>
            </ul>
         </nav>
